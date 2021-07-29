@@ -121,19 +121,17 @@ function hoursToMinutes(movies) {
 function bestFilmOfYear(movies, year) {
   let bestFilm = [];
   let yearMovies = movies.filter(x => x.year == year)
-  yearMovies = yearMovies.sort(function (prev, next) {
-    if (prev.score < next.score) { return -1 }
-    if (prev.score > next.score) { return 1 }
-    return 0
-  })
-
-  bestFilm = yearMovies.slice(0, 0)
-
-
-
-
+  if (yearMovies.length == 1) {
+    bestFilm = yearMovies;
+  } else {
+    yearMovies = yearMovies.sort(function (prev, next) {
+      if (prev.score < next.score) { return -1 }
+      if (prev.score > next.score) { return 1 }
+      return 0
+    })
+    bestFilm = yearMovies[0];
+  }
   return bestFilm
-
 }
 
 

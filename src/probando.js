@@ -518,39 +518,31 @@ const movies = [
 
 
 
-function hoursToMinutes(movies) {
+function bestFilmOfYear(movies, year) {
+    let bestFilm = [];
+    let yearMovies = movies.filter(x => x.year == year)
+    if (yearMovies.length == 1) {
+        bestFilm = yearMovies
+    } else {
+        yearMovies = yearMovies.sort(function (prev, next) {
+            if (prev.score < next.score) { return -1 }
+            if (prev.score > next.score) { return 1 }
+            return 0
+        })
+        bestFilm = yearMovies[0];
+    }
 
-    //should return a new array, not update the original one -------------ERROR ------------
-    //should return an array of movies with duration as a number
 
-    let hourMin = movies.map(obj => obj)
 
-    hourMin.forEach(movie => {
-        let duration = movie.duration;
-        let hour = duration.charAt(0)
-        hour = parseInt(hour)
-        console.log(hour)
-        hour = hour * 60;
-        let minute = 0;
-        if (duration.length == 8) {
-            let x = duration.charAt(3)
-            let y = duration.charAt(4)
-            let sum = x + y;
-            sum = parseInt(sum)
-            minute = sum;
-        }
-        if (duration.length == 7) {
-            let x = duration.charAt(3)
-            x = parseInt(x)
-            minute = x;
-        }
-        movie.duration = parseInt(hour + minute)
 
-    })
-    return hourMin
+
+
+    console.log(bestFilm)
+    return bestFilm
+
 }
 
-console.log(hoursToMinutes(movies))
+console.log(bestFilmOfYear(movies, 1957))
 
 
 

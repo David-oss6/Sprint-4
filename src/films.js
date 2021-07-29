@@ -46,7 +46,7 @@ function orderAlphabetically(movies) {
     if (prev > next) { return 1 }
     return 0
   })
-  sortedMovies.slice(0, 20)
+  sortedMovies = sortedMovies.slice(0, 20)
 
   return sortedMovies
 }
@@ -73,12 +73,8 @@ function moviesAverageByCategory(movies, category) {
 
   // should return average even if one of the movies does not have score-----ERROR-----------//
 
-  let categoryArray = movies.filter(movie => movie.genre.includes(category))
-  for (movie in categoryArray) {
-    if (!movie.hasOwnProperty(score)) {
-      categoryArray.splice(movie, 1)
-    }
-  }
+  let categoryArray = movies.filter(movie => movie.genre.includes(category) && movie.score.length == undefined)
+
 
 
   let averageScore = categoryArray.reduce((acc, it) => {
@@ -122,33 +118,21 @@ function hoursToMinutes(movies) {
   return hourMin
 }
 // Exercise 8: Get the best film of a year///////////////////////////////////////////
-function bestFilmOfYear(ano) {
-
-  // should return the best film of a year, searching in an array
-  let theBest = []
-  let mejorPeli = {};
-  let puntuacion = 0;
-  let maxPuntuacion = 0;
-  const yearMovies = movies.filter(x => x.year == ano)
-  yearMovies.forEach(movie => {
-    puntuacion = movie.score;
-    if (puntuacion > maxPuntuacion) {
-      maxPuntuacion = puntuacion
-      mejorPeli = movie;
-    }
-    if (puntuacion == maxPuntuacion) {
-      let a = mejorPeli.title.charAt(0);
-      let b = movie.title.charAt(0);
-      if (a < b) {
-        mejorPeli = movie;
-      }
-    }
-
+function bestFilmOfYear(movies, year) {
+  let bestFilm = [];
+  let yearMovies = movies.filter(x => x.year == year)
+  yearMovies = yearMovies.sort(function (prev, next) {
+    if (prev.score < next.score) { return -1 }
+    if (prev.score > next.score) { return 1 }
+    return 0
   })
-  bestFilmOfYear(1957)
-  theBest.push(mejorPeli)
-  console.log(theBest)
-  return theBest
+
+  bestFilm = yearMovies.slice(0, 0)
+
+
+
+
+  return bestFilm
 
 }
 

@@ -74,7 +74,13 @@ function moviesAverageByCategory(movies, category) {
   // should return average even if one of the movies does not have score-----ERROR-----------//
 
   let categoryArray = movies.filter(movie => movie.genre.includes(category))
-  categoryArray = categoryArray.filter(movie => movie.hasOwnProperty(score) == true)
+  for (movie in categoryArray) {
+    if (!movie.hasOwnProperty(score)) {
+      categoryArray.splice(movie, 1)
+    }
+  }
+
+
   let averageScore = categoryArray.reduce((acc, it) => {
     acc = acc + it.score
     return acc

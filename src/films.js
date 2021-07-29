@@ -123,13 +123,16 @@ function bestFilmOfYear(movies, year) {
   let yearMovies = movies.filter(x => x.year == year)
   if (yearMovies.length == 1) {
     bestFilm = yearMovies;
+    console.log(bestFilm)
   } else {
     yearMovies = yearMovies.sort(function (prev, next) {
       if (prev.score < next.score) { return -1 }
       if (prev.score > next.score) { return 1 }
       return 0
+      console.log(bestFilm)
     })
     bestFilm = yearMovies[0];
+    console.log(bestFilm)
   }
   return bestFilm
 }
